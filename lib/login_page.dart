@@ -29,9 +29,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String _getJsonString(String data) {
     if (data[0] == '[') {
-      var dataFix = jsonDecode(data);
-      String dataString = dataFix[0];
-      return dataString;
+      return data.substring(1, data.length - 1);
     } else {
       return data;
     }
@@ -92,31 +90,6 @@ class _LoginPageState extends State<LoginPage> {
     socketIO.destroy();
 
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CoursesPage(coursesList: courseList)));
-
-    // AlertDialog alert = new AlertDialog(
-    //   title: new Center(child: new Text('CORRECTO')),
-    //   content: SingleChildScrollView(
-    //     child: ListBody(
-    //       children: <Widget>[
-    //         new Text('USUARIO: ${_usernameController.text}'),
-    //         new Text('CURSOS: $data')
-    //       ],
-    //     ),
-    //   ),
-    //   actions: <Widget>[
-    //     new Center(
-    //         child: new FlatButton(
-    //       child: new Text('OK'),
-    //       onPressed: () {
-    //         Navigator.of(context).pop();
-    //       },
-    //     ))
-    //   ],
-    // );
-
-    // showDialog(context: context, builder: (_) => alert);
-
-    // socketIO.destroy();
   }
 
   void _onIncorrectPassword(dynamic data) {
