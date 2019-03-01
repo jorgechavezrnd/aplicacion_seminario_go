@@ -56,9 +56,7 @@ class _StudentDetailsState extends State<StudentDetails> with SingleTickerProvid
 
   String _getJsonString(String data) {
     if (data[0] == '[') {
-      var dataFix = jsonDecode(data);
-      String dataString = dataFix[0];
-      return dataString;
+      return data.substring(1, data.length - 1);
     } else {
       return data;
     }
@@ -130,7 +128,7 @@ class _StudentDetailsState extends State<StudentDetails> with SingleTickerProvid
     List<int> imageBytes = widget.image.readAsBytesSync();
     String base64Image = base64Encode(imageBytes);
     
-    socketIO.sendMessage('upload', '{"image": "$base64Image", "courseName": ${widget.courseName}}');
+    socketIO.sendMessage('upload', '{"image": "$base64Image", "courseName": "${widget.courseName}"}');
   }
 
   Widget buildBody(context) {
